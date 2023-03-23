@@ -1,18 +1,18 @@
 
-let section = QSAd('section')
-h4_porrtfolio = section[6].querySelectorAll('h4')
-for (let index = 0; index < h4_porrtfolio.length; index++) {
-    h4_porrtfolio[index].style.color  = "#d82c2e"
+let section = document.querySelectorAll('section')
+h4_portfolio = section[6].querySelectorAll('h4')
+for (let index = 0; index < h4_portfolio.length; index++) {
+    h4_portfolio[index].style.color  = "#d82c2e"
     
 }
 
-var div_travelAgency = O('portfolio_travel')
-var travelAgency_img = O('travelAgency')
+var div_travelAgency = document.getElementById('portfolio_travel')
+var travelAgency_img = document.getElementById('travelAgency')
 
 //mouseOver(travelAgency_img, div_travelAgency, 'span', 'Travel Agency')
 
 portfolio_section = section[5]
-let portfolio_item = C('portfolio_item')
+let portfolio_item = document.getElementsByClassName('portfolio_item')
 
 //It allows to display the content name of each portfolio img when the mouse over on the image.
 for (let index = 0; index <portfolio_item.length; index++) {
@@ -44,19 +44,25 @@ for (let index = 0; index < themes.length; index++) {
     theme.style.backgroundColor = theme.className
 
     theme.onclick = ()=>{
-        document.styleSheets[15].cssRules[1].style.setProperty('--main-color', theme.className)
-        if(localStorage.getItem('themeColor')){
-            localStorage.setItem('themeColor', theme.className); 
-            console.log(localStorage.getItem('themeColor'))
-        }else{
-            localStorage.setItem('themeColor', theme.className); 
-        }
-    };   
+        for (let i = 0; i < document.styleSheets.length; i++) {
+            const ss = document.styleSheets[i];
+        
+            if (ss.href == location.origin+"/assets/css/style.css") {
+                document.styleSheets[i].cssRules[1].style.setProperty('--main-color', theme.className)
+                if(localStorage.getItem('themeColor')){
+                    localStorage.setItem('themeColor', theme.className); 
+                    document.styleSheets[i].cssRules[1].style.setProperty('--main-color', localStorage.getItem('themeColor'));
+                    console.log(localStorage.getItem('themeColor'))
+                }else{
+                    localStorage.setItem('themeColor', theme.className); 
+                    document.styleSheets[i].cssRules[1].style.setProperty('--main-color', localStorage.getItem('themeColor'));
+                }
+            }
+        };   
+    }
 } 
 
-if(localStorage.getItem('themeColor')){
-    document.styleSheets[15].cssRules[1].style.setProperty('--main-color', localStorage.getItem('themeColor'));
-}
+
 window.navigator.geolocation.getCurrentPosition(
     (position)=>{
         var coordonnees = {
@@ -76,6 +82,26 @@ window.navigator.geolocation.getCurrentPosition(
     }
 )
 
+
+/* MAP */
+// Initialize and add the map
+function initMap() {
+    // The location of polone
+    const varsovie = {lat: 52.219258300838405, lng: 21.011828490135947};
+    // The map, centered at Uluru
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 4,
+      center: varsovie,
+    });
+    // The marker, positioned at varsovie
+    const marker = new google.maps.Marker({
+      position: varsovie,
+      map: map,
+    });
+  }
+
+window.initMap = initMap;
+
 /* var watch = window.navigator.geolocation.watchPosition(
     (position)=>{
         var coordonnees = {
@@ -90,23 +116,3 @@ window.navigator.geolocation.getCurrentPosition(
     }
 ) */
 //window.navigator.geolocation.clearWatch(watch)
-
-/* MAP */
-/* const latitude = 6.3602950;
-const longitude = 2.5112382; */
-// Initialize and add the map
-function initMap() {
-    // The location of agblangandan
-    const agblangandan = { lat:  6.3602950, lng: 2.5112382 };
-    // The map, centered at Uluru
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 4,
-      center: agblangandan,
-    });
-    // The marker, positioned at agblangandan
-    const marker = new google.maps.Marker({
-      position: agblangandan,
-      map: map,
-    });
-  }
-  window.initMap = initMap;
