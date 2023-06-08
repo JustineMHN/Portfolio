@@ -381,7 +381,10 @@ padding: 0;
 #portfolio .col-md-4{
     margin-bottom: 20px;
 }
-
+#portfolio_item a img{
+    width: 200px;
+    
+}
 /*---------------Recommandation--------------------------*/
 #recommandation{
     margin-bottom: 20px;

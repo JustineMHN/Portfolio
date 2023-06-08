@@ -7,7 +7,6 @@ for (let index = 0; index < h4_portfolio.length; index++) {
 var div_travelAgency = document.getElementById("portfolio_travel");
 var travelAgency_img = document.getElementById("travelAgency");
 
-//mouseOver(travelAgency_img, div_travelAgency, 'span', 'Travel Agency')
 
 portfolio_section = section[5];
 let portfolio_item = document.getElementsByClassName("portfolio_item");
@@ -71,55 +70,4 @@ for (let index = 0; index < themes.length; index++) {
   };
 }
 
-window.navigator.geolocation.getCurrentPosition(
-  (position) => {
-    var coordonnees = {
-      longitude: position.coords.longitude,
-      latitude: position.coords.latitude,
-      accuracy: position.coords.accuracy,
-    };
-    console.log(coordonnees);
-  },
-  (error) => {
-    console.log(error);
-  },
-  {
-    enableHighAccuracy: true,
-    timeout: 2000,
-    maximumAge: 6000,
-  }
-);
 
-/* MAP */
-// Initialize and add the map
-function initMap() {
-  // The location of polone
-  const varsovie = { lat: 52.219258300838405, lng: 21.011828490135947 };
-  // The map, centered at Uluru
-  const map = new google.maps.Map(document.getElementById("map"), {
-    zoom: 4,
-    center: varsovie,
-  });
-  // The marker, positioned at varsovie
-  const marker = new google.maps.Marker({
-    position: varsovie,
-    map: map,
-  });
-}
-
-window.initMap = initMap;
-
-/* var watch = window.navigator.geolocation.watchPosition(
-    (position)=>{
-        var coordonnees = {
-            longitude : position.coords.longitude,
-            latitude : position.coords.latitude,
-            accuracy : position.coords.accuracy
-        } 
-        console.log(coordonnees)
-    },
-    (error)=>{
-        console.log(error)
-    }
-) */
-//window.navigator.geolocation.clearWatch(watch)
